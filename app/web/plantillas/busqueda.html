@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block titulo %}Buscar «{{ consulta }}» · SitioComponentes{% endblock %}
+{% block contenido %}
+<h1>Buscar</h1>
+<form class="busqueda-principal" action="/buscar" method="get">
+  <input type="search" name="q" value="{{ consulta }}" autofocus>
+  <button type="submit">Buscar</button>
+</form>
+<div id="resultados">{% include "_resultados.html" %}</div>
+{% endblock %}

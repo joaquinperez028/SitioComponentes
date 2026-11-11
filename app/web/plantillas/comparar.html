@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block titulo %}Comparar · SitioComponentes{% endblock %}
+{% block contenido %}
+<h1>Comparar {{ nombresCategoria[categoria.value] }}</h1>
+<table class="tabla comparacion">
+  <thead>
+    <tr>
+      <th></th>
+      {% for p in comparacion.productos %}
+      <th><a href="/producto/{{ categoria.value }}/{{ p.id }}">{{ p.nombre }}</a></th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for fila in comparacion.filas %}
+    <tr>
+      <th scope="row">{{ fila.etiqueta }}</th>
+      {% for valor in fila.valores %}
+      {% set dato = fila.datos[loop.index0] %}
+      <td class="{% if loop.index0 in fila.mejorIndices %}mejor{% endif %}">
+        {{ valor|valor }}
+        {% if dato and dato.estado != "verificado" %}<span class="insignia sin-verificar" title="Sin verificar">?</span>{% endif %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Benchmarks comparables</h2>
+<p class="nota">Solo se enfrentan resultados con la misma prueba, resolución y preset.</p>
+{% if comparacion.benchmarks %}
+<table class="tabla comparacion">
+  <thead>
+    <tr>
+      <th>Test</th>
+      {% for p in comparacion.productos %}<th>{{ p.nombre }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for grupo in comparacion.benchmarks %}
+    <tr>
+      <th scope="row">{{ grupo.prueba }}{% if grupo.resolucion %} · {{ grupo.resolucion }}{% endif %}{% if grupo.preset %} · {{ grupo.preset }}{% endif %}
+        <small>({{ grupo.unidad }}, {{ "más" if grupo.mayorEsMejor else "menos" }} es mejor)</small></th>
+      {% for p in comparacion.productos %}
+      <td class="{% if grupo.mejorProductoId == p.id %}mejor{% endif %}">
+        {% for b in grupo.filasPorProducto.get(p.id, []) %}
+        <a href="{{ b.urlFuente }}" target="_blank" rel="noopener" title="{{ b.nombreFuente }}">{{ b.valor|valor }}</a>{% if not loop.last %}, {% endif %}
+        {% else %}—{% endfor %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="vacio">No hay benchmarks comparables entre estos productos.</p>
+{% endif %}
+{% endblock %}

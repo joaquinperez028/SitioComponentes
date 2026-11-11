@@ -1,0 +1,10 @@
+[project]
+name = "sitiocomponentes"
+version = "0.1.0"
+description = "Comparador local de especificaciones y rendimiento de componentes y equipos informáticos"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

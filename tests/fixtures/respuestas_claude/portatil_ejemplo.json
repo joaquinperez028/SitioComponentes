@@ -1,0 +1,35 @@
+{
+  "modelo": {
+    "nombre": {"valor": "Ejemplo Gaming 16 Gen 1", "fragmento": "Ejemplo Gaming 16 Gen 1"},
+    "fabricante": {"valor": "Ejemplo", "fragmento": "Ejemplo Gaming 16 Gen 1"},
+    "pantallaPulgadas": {"valor": 16, "fragmento": "16\" WQXGA (2560x1600) IPS, 165Hz"},
+    "resolucionPantalla": {"valor": "2560x1600", "fragmento": "WQXGA (2560x1600)"},
+    "tasaRefrescoHz": {"valor": 165, "fragmento": "IPS, 165Hz"},
+    "tipoPanel": {"valor": "IPS", "fragmento": "(2560x1600) IPS"},
+    "pesoKg": {"valor": 2.3, "fragmento": "Starting at 2.3 kg"},
+    "refrigeracion": {"valor": "Dual fans, 4 heat pipes, vapor chamber", "fragmento": "Thermal: Dual fans, 4 heat pipes, vapor chamber"},
+    "bateriaWh": {"valor": 80, "fragmento": "Integrated 80Wh"}
+  },
+  "configuraciones": [
+    {
+      "nombre": {"valor": "Ejemplo Gaming 16 Gen 1 EG16-A", "fragmento": "EG16-A"},
+      "cpuNombre": {"valor": "Intel Core i7-13700H", "fragmento": "Intel® Core™ i7-13700H"},
+      "gpuNombre": {"valor": "NVIDIA GeForce RTX 4060 Laptop GPU", "fragmento": "NVIDIA® GeForce RTX™ 4060 Laptop GPU"},
+      "tgpW": {"valor": 115, "fragmento": "115W TGP"},
+      "pl1W": {"valor": null, "fragmento": null},
+      "pl2W": {"valor": null, "fragmento": null},
+      "ramGb": {"valor": 16, "fragmento": "16GB DDR5-5200"},
+      "almacenamientoGb": {"valor": 1000, "fragmento": "1TB SSD"}
+    },
+    {
+      "nombre": {"valor": "Ejemplo Gaming 16 Gen 1 EG16-B", "fragmento": "EG16-B"},
+      "cpuNombre": {"valor": "Intel Core i7-13700H", "fragmento": "Intel® Core™ i7-13700H"},
+      "gpuNombre": {"valor": null, "fragmento": null},
+      "tgpW": {"valor": null, "fragmento": null},
+      "pl1W": {"valor": null, "fragmento": null},
+      "pl2W": {"valor": null, "fragmento": null},
+      "ramGb": {"valor": 16, "fragmento": "16GB DDR5-5200"},
+      "almacenamientoGb": {"valor": 512, "fragmento": "512GB SSD"}
+    }
+  ]
+}

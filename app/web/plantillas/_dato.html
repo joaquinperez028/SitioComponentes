@@ -1,0 +1,16 @@
+{% if dato %}
+<span class="dato" id="dato-{{ dato.id }}">
+  {% if dato.estado == "verificado" %}
+    <span class="insignia verificado" title="Verificado">✓ verificado</span>
+  {% else %}
+    <span class="insignia sin-verificar">sin verificar</span>
+    <button class="boton-mini" hx-post="/datos/{{ dato.id }}/verificar" hx-target="#dato-{{ dato.id }}" hx-swap="outerHTML">Validar</button>
+  {% endif %}
+  {% if not dato.fragmentoEncontrado %}<span class="insignia alerta" title="La cita no aparece en la página de origen">⚠ cita no encontrada</span>{% endif %}
+  <details class="origen">
+    <summary>fuente</summary>
+    {% if dato.fragmento %}<q>{{ dato.fragmento }}</q>{% endif %}
+    {% if dato.urlFuente %}<a href="{{ dato.urlFuente }}" target="_blank" rel="noopener">{{ dato.urlFuente }}</a>{% endif %}
+  </details>
+</span>
+{% endif %}

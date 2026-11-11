@@ -1,0 +1,38 @@
+{% if productos %}
+<form action="/comparar/{{ categoria.value }}" method="get" class="form-comparar">
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>Comparar</th>
+        {% if categoria.value == "cpu" %}
+        <th>Model</th><th>Manufacturer</th><th>Platform</th><th>Cores</th><th>Threads</th><th>Boost Clock (GHz)</th><th>TDP (W)</th>
+        {% elif categoria.value == "gpu" %}
+        <th>Model</th><th>Manufacturer</th><th>Platform</th><th>VRAM (GB)</th><th>Memory Type</th><th>TDP / TGP (W)</th>
+        {% else %}
+        <th>Configuration</th><th>CPU</th><th>GPU</th><th>GPU TGP (W)</th><th>RAM (GB)</th><th>Screen Size (in)</th><th>Weight (kg)</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in productos %}
+      <tr>
+        <td><input type="checkbox" name="ids" value="{{ p.id }}" aria-label="Comparar {{ p.nombre }}"></td>
+        <td><a href="/producto/{{ categoria.value }}/{{ p.id }}">{{ p.nombre }}</a></td>
+        {% if categoria.value == "cpu" %}
+        <td>{{ p.fabricante }}</td><td>{{ p.plataforma|valor }}</td><td>{{ p.nucleos|valor }}</td><td>{{ p.hilos|valor }}</td>
+        <td>{{ p.relojBoostGhz|valor }}</td><td>{{ p.tdpW|valor }}</td>
+        {% elif categoria.value == "gpu" %}
+        <td>{{ p.fabricante }}</td><td>{{ p.plataforma|valor }}</td><td>{{ p.vramGb|valor }}</td><td>{{ p.tipoVram|valor }}</td><td>{{ p.tdpW|valor }}</td>
+        {% else %}
+        <td>{{ p.cpuNombre|valor }}</td><td>{{ p.gpuNombre|valor }}</td><td>{{ p.tgpW|valor }}</td><td>{{ p.ramGb|valor }}</td>
+        <td>{{ p.pantallaPulgadas|valor }}</td><td>{{ p.pesoKg|valor }}</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit">Comparar seleccionados (2–4)</button>
+</form>
+{% else %}
+<p class="vacio">No hay productos con esos filtros. Usa la búsqueda para importar uno nuevo.</p>
+{% endif %}

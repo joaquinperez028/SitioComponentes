@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block titulo %}{{ nombresCategoria[categoria.value] }} · SitioComponentes{% endblock %}
+{% block contenido %}
+<h1>{{ nombresCategoria[categoria.value] }}</h1>
+<form class="filtros" action="/catalogo/{{ categoria.value }}" method="get"
+      hx-get="/catalogo/{{ categoria.value }}" hx-target="#tabla-catalogo" hx-push-url="true"
+      hx-trigger="change, keyup changed delay:400ms">
+  {% if categoria.value in ("cpu", "gpu") %}
+  <label>Fabricante
+    <select name="fabricante">
+      <option value="">Todos</option>
+      {% for fabricante in fabricantes %}
+      <option {% if filtros.fabricante == fabricante %}selected{% endif %}>{{ fabricante }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Plataforma
+    <select name="plataforma">
+      <option value="">Todas</option>
+      {% for clave, nombre in nombresPlataforma.items() %}
+      <option value="{{ clave }}" {% if filtros.plataforma == clave %}selected{% endif %}>{{ nombre }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  {% if categoria.value == "cpu" %}
+  <label>Núcleos mín. <input type="number" name="nucleosMin" min="1" value="{{ filtros.nucleosMin or '' }}"></label>
+  {% else %}
+  <label>VRAM mín. (GB) <input type="number" name="vramMin" min="1" step="any" value="{{ filtros.vramMin or '' }}"></label>
+  {% endif %}
+  <label>TDP máx. (W) <input type="number" name="tdpMax" min="1" value="{{ filtros.tdpMax or '' }}"></label>
+  {% else %}
+  <label>CPU <input type="text" name="cpu" value="{{ filtros.cpu or '' }}" placeholder="13700H"></label>
+  <label>GPU <input type="text" name="gpu" value="{{ filtros.gpu or '' }}" placeholder="4060"></label>
+  <label>TGP mín. (W) <input type="number" name="tgpMin" min="1" value="{{ filtros.tgpMin or '' }}"></label>
+  <label>RAM mín. (GB) <input type="number" name="ramMin" min="1" value="{{ filtros.ramMin or '' }}"></label>
+  <label>Pantalla (in) <input type="number" name="pantallaMin" step="0.1" value="{{ filtros.pantallaMin or '' }}" placeholder="mín.">
+    – <input type="number" name="pantallaMax" step="0.1" value="{{ filtros.pantallaMax or '' }}" placeholder="máx."></label>
+  <label>Peso máx. (kg) <input type="number" name="pesoMax" step="0.1" value="{{ filtros.pesoMax or '' }}"></label>
+  {% endif %}
+  <noscript><button type="submit">Filtrar</button></noscript>
+</form>
+<div id="tabla-catalogo">{% include "_tabla_catalogo.html" %}</div>
+{% endblock %}

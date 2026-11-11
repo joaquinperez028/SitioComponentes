@@ -1,0 +1,21 @@
+{% set activo = trabajo.estado in ("pendiente", "en_curso") %}
+<div class="trabajo trabajo-{{ trabajo.estado }}" id="trabajo-{{ trabajo.id }}"
+     {% if activo %}hx-get="/trabajos/{{ trabajo.id }}" hx-trigger="every 2s" hx-swap="outerHTML"{% endif %}>
+  <strong>Trabajo #{{ trabajo.id }}</strong>
+  {% if trabajo.estado == "pendiente" %}En cola…
+  {% elif trabajo.estado == "en_curso" %}Descargando y extrayendo…
+  {% elif trabajo.estado == "completado" %}Completado.
+  {% else %}Error.
+  {% endif %}
+  {% if trabajo.mensaje %}<span class="mensaje">{{ trabajo.mensaje }}</span>{% endif %}
+  {% if trabajo.estado == "completado" and trabajo.resultado and trabajo.resultado.productoIds %}
+  <ul>
+    {% for productoId in trabajo.resultado.productoIds %}
+    <li><a href="/producto/{{ trabajo.resultado.categoria }}/{{ productoId }}">Ver producto #{{ productoId }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if trabajo.estado == "completado" and trabajo.resultado and trabajo.resultado.resumenId %}
+  <a href="/producto/{{ trabajo.resultado.categoria }}/{{ trabajo.resultado.productoId }}">Ver resumen nuevo</a>
+  {% endif %}
+</div>

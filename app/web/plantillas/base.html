@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}SitioComponentes{% endblock %}</title>
+  <link rel="stylesheet" href="/estaticos/estilos.css">
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+</head>
+<body>
+  <header class="cabecera">
+    <a class="marca" href="/">SitioComponentes</a>
+    <nav>
+      {% for clave, nombre in nombresCategoria.items() %}
+      <a href="/catalogo/{{ clave }}">{{ nombre }}</a>
+      {% endfor %}
+      <a href="/alias-pendientes">Alias pendientes</a>
+    </nav>
+    <form class="busqueda-cabecera" action="/buscar" method="get">
+      <input type="search" name="q" placeholder="Buscar por nombre…" aria-label="Buscar por nombre">
+    </form>
+  </header>
+  <main>
+    {% block contenido %}{% endblock %}
+  </main>
+</body>
+</html>

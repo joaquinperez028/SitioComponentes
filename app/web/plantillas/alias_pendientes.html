@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block titulo %}Alias pendientes · SitioComponentes{% endblock %}
+{% block contenido %}
+<h1>Alias pendientes de confirmar</h1>
+<p class="nota">Nombres que las reglas no reconocieron y en los que Claude no tuvo confianza suficiente.</p>
+{% for p in pendientes %}
+<div class="alias-pendiente">
+  <p><strong>{{ p.alias }}</strong> ({{ p.categoria }}) · confianza {{ "%.0f"|format(p.confianza * 100) }}%
+    {% if p.motivo %}<br><small>{{ p.motivo }}</small>{% endif %}</p>
+  <form method="post" action="/alias-pendientes/{{ p.id }}/confirmar">
+    <select name="productoId">
+      {% for o in p.opciones %}
+      <option value="{{ o.id }}" {% if o.id == p.productoIdPropuesto %}selected{% endif %}>{{ o.nombre }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Es este</button>
+  </form>
+  <form method="post" action="/alias-pendientes/{{ p.id }}/rechazar"><button type="submit">Ninguno</button></form>
+</div>
+{% else %}
+<p class="vacio">No hay alias pendientes.</p>
+{% endfor %}
+{% endblock %}

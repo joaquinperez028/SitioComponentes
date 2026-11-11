@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block titulo %}{{ producto.nombre }} · SitioComponentes{% endblock %}
+{% block contenido %}
+<p class="migas"><a href="/catalogo/{{ categoria.value }}">{{ nombresCategoria[categoria.value] }}</a></p>
+<h1>{{ producto.nombre }}</h1>
+{% if categoria.value == "portatil" %}
+<p class="subtitulo">Modelo: {{ producto.modeloNombre }} ·
+  CPU: {% if producto.cpuEnlazada %}<a href="/producto/cpu/{{ producto.cpuId }}">{{ producto.cpuNombre }}</a>{% else %}{{ producto.cpuNombre|valor }}{% endif %} ·
+  GPU: {% if producto.gpuEnlazada %}<a href="/producto/gpu/{{ producto.gpuId }}">{{ producto.gpuNombre }}</a>{% else %}{{ producto.gpuNombre|valor }}{% endif %}</p>
+{% endif %}
+
+<section>
+  <h2>Especificaciones</h2>
+  <table class="tabla specs">
+    <tbody>
+      {% for fila in filas %}
+      <tr>
+        <th scope="row">{{ fila.etiqueta }}</th>
+        <td>{{ fila.valor|valor }}</td>
+        <td>{% set dato = fila.dato %}{% include "_dato.html" %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if producto.urlFuente %}<p class="fuente">Fuente: <a href="{{ producto.urlFuente }}" target="_blank" rel="noopener">{{ producto.urlFuente }}</a></p>{% endif %}
+</section>
+
+<section>
+  <h2>Rendimiento</h2>
+  <button hx-post="/producto/{{ categoria.value }}/{{ producto.id }}/fuentes-nuevas" hx-target="#estado-fuentes">Buscar fuentes nuevas</button>
+  <div id="estado-fuentes"></div>
+
+  {% for resumen in resumenes %}
+  <article class="resumen">
+    <p>{{ resumen.texto }}</p>
+    <ol class="citas">
+      {% for cita in resumen.citas %}
+      <li value="{{ cita.numero }}"><a href="{{ cita.url }}" target="_blank" rel="noopener">{{ cita.nombreFuente }} — {{ cita.titulo }}</a></li>
+      {% endfor %}
+    </ol>
+    {% if resumen.estado == "verificado" %}<span class="insignia verificado">✓ verificado</span>
+    {% else %}<span hx-target="this" hx-swap="outerHTML"><span class="insignia sin-verificar">sin verificar</span>
+      <button class="boton-mini" hx-post="/resumenes/{{ resumen.id }}/verificar">Validar</button></span>{% endif %}
+  </article>
+  {% else %}
+  <p class="vacio">Aún no hay resumen de rendimiento.</p>
+  {% endfor %}
+
+  {% if benchmarks %}
+  <table class="tabla">
+    <thead><tr><th>Test</th><th>Resolution</th><th>Preset</th><th>Result</th><th>Fuente</th><th>Fecha</th><th></th></tr></thead>
+    <tbody>
+      {% for b in benchmarks %}
+      <tr>
+        <td>{{ b.prueba }}</td><td>{{ b.resolucion|valor }}</td><td>{{ b.preset|valor }}</td>
+        <td><a href="{{ b.urlFuente }}" target="_blank" rel="noopener">{{ b.valor|valor }} {{ b.unidad }}</a></td>
+        <td>{{ b.nombreFuente }}</td><td>{{ b.fecha|valor }}</td>
+        <td>{% if b.estado == "verificado" %}<span class="insignia verificado">✓</span>
+            {% else %}<span hx-target="this" hx-swap="outerHTML"><button class="boton-mini" hx-post="/benchmarks/{{ b.id }}/verificar">Validar</button></span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</section>
+{% endblock %}

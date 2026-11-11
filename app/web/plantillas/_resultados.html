@@ -1,0 +1,30 @@
+{% if consulta.strip() %}
+  {% if resultados %}
+  <ul class="resultados">
+    {% for r in resultados %}
+    <li><span class="etiqueta-categoria">{{ nombresCategoria[r.categoria] }}</span>
+        <a href="/producto/{{ r.categoria }}/{{ r.id }}">{{ r.nombre }}</a></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="sin-resultados">
+    <p>«{{ consulta }}» no está en la base de datos. Se puede importar desde la ficha oficial del fabricante
+       (Intel ARK, AMD, NVIDIA, Lenovo PSREF, ASUS, MSI…).</p>
+    <form hx-post="/trabajos/importar" hx-target="#estado-importacion" hx-swap="innerHTML">
+      <input type="hidden" name="nombre" value="{{ consulta }}">
+      <label>Categoría
+        <select name="categoria">
+          {% for categoria in categorias %}
+          <option value="{{ categoria.value }}">{{ nombresCategoria[categoria.value] }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>URL de la ficha oficial
+        <input type="url" name="url" required placeholder="https://…">
+      </label>
+      <button type="submit">Importar en segundo plano</button>
+    </form>
+    <div id="estado-importacion"></div>
+  </div>
+  {% endif %}
+{% endif %}

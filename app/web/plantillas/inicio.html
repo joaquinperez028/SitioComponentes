@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block contenido %}
+<h1>Comparador de componentes y equipos</h1>
+<form class="busqueda-principal" action="/buscar" method="get"
+      hx-get="/buscar" hx-target="#resultados" hx-trigger="submit, keyup changed delay:400ms from:#consulta">
+  <input id="consulta" type="search" name="q" autofocus placeholder="p. ej. RTX 4060 Laptop, Ryzen 7 7800X3D, Legion 5…">
+  <button type="submit">Buscar</button>
+</form>
+<div id="resultados"></div>
+
+<section class="atajos">
+  {% for clave, nombre in nombresCategoria.items() %}
+  <a class="tarjeta" href="/catalogo/{{ clave }}">{{ nombre }}</a>
+  {% endfor %}
+</section>
+{% if aliasPendientes %}
+<p class="aviso">Hay {{ aliasPendientes }} alias pendientes de confirmar. <a href="/alias-pendientes">Revisar</a></p>
+{% endif %}
+{% endblock %}

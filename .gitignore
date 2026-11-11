@@ -1,0 +1,14 @@
+# Secretos (D-32)
+.env
+
+# Datos locales
+datos/
+*.sqlite3
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/

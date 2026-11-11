@@ -1,0 +1,13 @@
+{
+  "nombre": {"valor": "Core i7-13700H", "fragmento": "Intel® Core™ i7-13700H Processor"},
+  "fabricante": {"valor": "Intel", "fragmento": "Intel® Core™ i7-13700H Processor"},
+  "plataforma": {"valor": "movil", "fragmento": "Vertical Segment: Mobile"},
+  "nucleos": {"valor": 14, "fragmento": "Total Cores: 14"},
+  "hilos": {"valor": 20, "fragmento": "Total Threads: 20"},
+  "relojBaseGhz": {"valor": 2.4, "fragmento": "Performance-core Base Frequency: 2.4 GHz"},
+  "relojBoostGhz": {"valor": 5.0, "fragmento": "Max Turbo Frequency: 5 GHz"},
+  "tdpW": {"valor": 45, "fragmento": "Processor Base Power: 45 W"},
+  "cacheL3Mb": {"valor": 24, "fragmento": "Cache: 24 MB Intel® Smart Cache"},
+  "socket": {"valor": "FCBGA1744", "fragmento": "Sockets Supported: FCBGA1744"},
+  "fechaLanzamiento": {"valor": "Q1'23", "fragmento": "Launch Date: Q1'23"}
+}

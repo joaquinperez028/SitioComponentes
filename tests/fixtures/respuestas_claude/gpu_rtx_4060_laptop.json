@@ -1,0 +1,14 @@
+```json
+{
+  "nombre": {"valor": "GeForce RTX 4060 Laptop GPU", "fragmento": "GeForce RTX 4060 Laptop GPU"},
+  "fabricante": {"valor": "NVIDIA", "fragmento": "GeForce RTX 4060 Laptop GPU | NVIDIA"},
+  "plataforma": {"valor": "movil", "fragmento": "GeForce RTX 4060 Laptop GPU"},
+  "vramGb": {"valor": 8, "fragmento": "Memory Size: 8 GB"},
+  "tipoVram": {"valor": "GDDR6", "fragmento": "Memory Type: GDDR6"},
+  "anchoBusBits": {"valor": 128, "fragmento": "Memory Interface Width: 128-bit"},
+  "unidadesShader": {"valor": 3072, "fragmento": "NVIDIA CUDA® Cores: 3072"},
+  "relojBoostMhz": {"valor": 2370, "fragmento": "Boost Clock (MHz): 1470 - 2370 MHz"},
+  "tdpW": {"valor": 115, "fragmento": "Laptop GPU Power (W): 35 - 115 W"},
+  "fechaLanzamiento": {"valor": null, "fragmento": null}
+}
+```

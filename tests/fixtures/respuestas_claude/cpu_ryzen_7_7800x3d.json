@@ -1,0 +1,13 @@
+{
+  "nombre": {"valor": "Ryzen 7 7800X3D", "fragmento": "AMD Ryzen™ 7 7800X3D Processor"},
+  "fabricante": {"valor": "AMD", "fragmento": "AMD Ryzen™ 7 7800X3D Processor"},
+  "plataforma": {"valor": "escritorio", "fragmento": "Platform Desktop"},
+  "nucleos": {"valor": 8, "fragmento": "# of CPU Cores 8"},
+  "hilos": {"valor": 16, "fragmento": "# of Threads 16"},
+  "relojBaseGhz": {"valor": 4.2, "fragmento": "Base Clock 4.2 GHz"},
+  "relojBoostGhz": {"valor": 5.0, "fragmento": "Max. Boost Clock Up to 5.0 GHz"},
+  "tdpW": {"valor": 120, "fragmento": "Default TDP 120W"},
+  "cacheL3Mb": {"valor": 96, "fragmento": "L3 Cache 96 MB"},
+  "socket": {"valor": "AM5", "fragmento": "CPU Socket AM5"},
+  "fechaLanzamiento": {"valor": "2023-04-06", "fragmento": "Launch Date 4/6/2023"}
+}
